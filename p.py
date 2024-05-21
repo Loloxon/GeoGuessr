@@ -1,8 +1,8 @@
 from PIL import Image
 import os
 
-INPUT = 'SZ/images/' # tego nie wrzucam
-OUTPUT = 'SZ/img/'
+INPUT = 'KC/images/' # tego nie wrzucam
+OUTPUT = 'KC/'
 
 def main():
     for filename in os.listdir(INPUT):
