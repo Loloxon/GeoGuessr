@@ -1,14 +1,24 @@
 <div style="display: grid">
-  <p style="text-align: center">Wybierz wszystkie obrazki przedstawiające krajobraz <span style="font-weight: bold">STREFY UMIARKOWNANEJ</span>.</p>
-  <div style="display: grid; grid-template: auto auto auto / auto auto auto ;">
+
+  <p style="text-align: center">Wybierz wszystkie obrazki przedstawiające krajobraz <span style="font-weight: bold">{{stageName}}</span>.</p>
+
+  <div class="picture-div">
 
     <mat-checkbox *ngFor="let img of images"
                   class="checkbox-button"
-                  (click)="img.isSelected = !img.isSelected"
+                  (click)="onClickImage(img)"
                   [ngClass]="img.isSelected ? 'checkbox-selected' : ''"
     >
       <img [src]="img.path" class="image">
     </mat-checkbox>
 
   </div>
+
+  <button type="button"
+          mat-flat-button
+          color="primary"
+          class="confirm-button"
+          [disabled]="selectedImgListLength < 5"
+          (click)="onConfirm()">CONFIRM</button>
+
 </div>
