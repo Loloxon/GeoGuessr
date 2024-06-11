@@ -12,22 +12,25 @@
 
     <mat-divider></mat-divider>
 
-    <mat-stepper [linear]="true" *ngIf="dataLoaded">
+    <mat-stepper [linear]="true" #stepper *ngIf="dataLoaded">
         <mat-step label="Zone">
             <form>
                 <app-captcha-select [stageName]="stageNames['Zone']"
-                                    [imageNames]="stagePhotos['Zone']"></app-captcha-select>
+                                    [imageNames]="stagePhotos['Zone']"
+                                    [stepper]="stepper"></app-captcha-select>
             </form>
         </mat-step>
         <mat-step label="Continent">
             <form>
                 <app-captcha-select [stageName]="stageNames['Continent']"
-                                    [imageNames]="stagePhotos['Continent']"></app-captcha-select>
+                                    [imageNames]="stagePhotos['Continent']"
+                                    [stepper]="stepper"></app-captcha-select>
             </form>
         </mat-step>
         <mat-step label="Country">
             <app-captcha-select [stageName]="stageNames['Country']"
-                                [imageNames]="stagePhotos['Country']"></app-captcha-select>
+                                [imageNames]="stagePhotos['Country']"
+                                [stepper]="stepper"></app-captcha-select>
         </mat-step>
     </mat-stepper>
 </div>

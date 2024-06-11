@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
 import {SubmitModalComponent} from "../submit-modal/submit-modal.component";
+import {MatStepper} from "@angular/material/stepper";
 
 interface ImageData {
     photoName: string;
@@ -30,6 +31,9 @@ export class CaptchaSelectComponent implements OnChanges {
 
     @Input()
     public imageNames: ImageData[] = [];
+
+    @Input()
+    public stepper!: MatStepper;
 
     public images: ImageModel[] = [];
 
@@ -59,14 +63,48 @@ export class CaptchaSelectComponent implements OnChanges {
         this.selectedImgListLength = this.images.filter((i: ImageModel) => i.isSelected).length;
     }
 
+    public canGoToNextStep(): boolean {
+        if (this.stepper) {
+            const currentIndex = this.stepper.selectedIndex;
+            return currentIndex < this.stepper.steps.length - 1;
+        }
+        return false;
+    }
+
     public onConfirm() {
-        const dialogRef = this.dialog.open(SubmitModalComponent, {
-            data: {
-                title: 'You selected right images!',
-                subtitle: 'You can now go to the next stage',
-                nextButtonActive: true,
-                retryButtonActive: true
+        var dialogRef;
+        if (this.images.filter((i: ImageModel) => i.isSelected && i.isCorrect).length !== 5) {
+            dialogRef = this.dialog.open(SubmitModalComponent, {
+                data: {
+                    title: 'You selected wrong images!',
+                    subtitle: 'Please try again',
+                    nextButtonActive: false,
+                    retryButtonActive: true
+                }
+            })
+            return;
+        } else {
+            if (this.canGoToNextStep()) {
+                dialogRef = this.dialog.open(SubmitModalComponent, {
+                    data: {
+                        title: 'You selected right images!',
+                        subtitle: 'You can now go to the next stage',
+                        nextButtonActive: true,
+                        retryButtonActive: true
+                    }
+                })
+            } else {
+                dialogRef = this.dialog.open(SubmitModalComponent, {
+                    data: {
+                        title: 'You selected right images!',
+                        subtitle: 'You have completed the game',
+                        nextButtonActive: false,
+                        retryButtonActive: true
+                    }
+                })
             }
-        })
+        }
+
+        dialogRef.componentInstance.stepper = this.stepper;
     }
 }
