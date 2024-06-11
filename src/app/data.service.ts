@@ -62,7 +62,7 @@ export class DataService {
             return { name: '', data: [] };
         }
 
-        const chosenStage = stages[Math.floor(Math.random() * stages.length)];
+        var chosenStage = stages[Math.floor(Math.random() * stages.length)];
         const [dfChosen, dfNotChosen] = this.splitDataFrames(stage, chosenStage);
 
         if (dfChosen.length < DataService.MIN_CHOSEN_SAMPLES || dfNotChosen.length < DataService.MIN_NOT_CHOSEN_SAMPLES) {
