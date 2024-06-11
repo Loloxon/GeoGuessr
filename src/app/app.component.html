@@ -1,30 +1,36 @@
 <div style="padding: 10px">
 
-  <div class="header-div">
+    <div class="header-div">
 
-<!--    <img src="assets/geoguessr.webp" class="logo-icon">-->
+        <!--    <img src="assets/geoguessr.webp" class="logo-icon">-->
 
-    <h1 class="header">GeoGuessr Captcha</h1>
+        <h1 class="header">GeoGuessr Captcha</h1>
 
-<!--    <img src="assets/captcha.png" class="logo-icon">-->
+        <!--    <img src="assets/captcha.png" class="logo-icon">-->
 
-  </div>
+    </div>
 
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-  <mat-stepper [linear]="true" #stepper>
-    <mat-step label="Zone">
-      <form>
-        <app-captcha-select stageName="STREFY UMIARKOWANEJ"></app-captcha-select>
-      </form>
-    </mat-step>
-    <mat-step label="Continent">
-      <form>
-        <app-captcha-select stageName="EUROPY"></app-captcha-select>
-      </form>
-    </mat-step>
-    <mat-step label="Country">
-      <app-captcha-select stageName="AUSTRALII"></app-captcha-select>
-    </mat-step>
-  </mat-stepper>
+    <mat-stepper [linear]="true" #stepper *ngIf="dataLoaded">
+        <mat-step label="Zone">
+            <form>
+                <app-captcha-select [stageName]="stageNames['Zone']"
+                                    [imageNames]="stagePhotos['Zone']"
+                                    [stepper]="stepper"></app-captcha-select>
+            </form>
+        </mat-step>
+        <mat-step label="Continent">
+            <form>
+                <app-captcha-select [stageName]="stageNames['Continent']"
+                                    [imageNames]="stagePhotos['Continent']"
+                                    [stepper]="stepper"></app-captcha-select>
+            </form>
+        </mat-step>
+        <mat-step label="Country">
+            <app-captcha-select [stageName]="stageNames['Country']"
+                                [imageNames]="stagePhotos['Country']"
+                                [stepper]="stepper"></app-captcha-select>
+        </mat-step>
+    </mat-stepper>
 </div>

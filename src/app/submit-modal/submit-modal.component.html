@@ -1,8 +1,11 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content>
-    <p>{{data.subtitle}}</p>
+    <p>{{ data.subtitle }}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-stroked-button color="primary" class="button-large" *ngIf="data.retryButtonActive">Try again</button>
-    <button mat-flat-button color="primary" class="button-large" *ngIf="data.nextButtonActive">Next</button>
+    <button mat-stroked-button color="primary" class="button-large" *ngIf="data.retryButtonActive" (click)="onRetry()" >
+        Try again
+    </button>
+    <button mat-flat-button color="primary" class="button-large" *ngIf="data.nextButtonActive" (click)="onNext()">Next
+    </button>
 </mat-dialog-actions>
