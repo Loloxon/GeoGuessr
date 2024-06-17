@@ -55,7 +55,7 @@ export class CaptchaSelectComponent implements OnChanges {
             this.selectedImgListLength = this.images.filter((i: ImageModel) => i.isSelected).length;
 
             if (this.selectedImgListLength < 5) {
-                console.log('dupa: ' + img.isCorrect)
+                console.log(img.isCorrect)
                 img.isSelected = true;
             }
         }
